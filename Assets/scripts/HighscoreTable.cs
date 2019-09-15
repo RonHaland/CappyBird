@@ -16,7 +16,8 @@ public class HighscoreTable : MonoBehaviour
     public Transform entryTemplate;
     public List<Transform> highscoreEntryTransformList;
     public GameObject canvasObject;
-
+    public Color colorFirst;
+    public Color colorRest;
 
 
 
@@ -157,18 +158,18 @@ public class HighscoreTable : MonoBehaviour
             string name = highscoreEntry.name;
             entryTransform.Find("nameText").GetComponent<Text>().text = name;
 
-            // Highlight First
+             // Highlight First
             if (rank == 1)
             {
-                entryTransform.Find("posText").GetComponent<Text>().color = Color.black;
-                entryTransform.Find("scoreText").GetComponent<Text>().color = Color.black;
-                entryTransform.Find("nameText").GetComponent<Text>().color = Color.black;
+                entryTransform.Find("posText").GetComponent<Text>().color = colorFirst;
+                entryTransform.Find("scoreText").GetComponent<Text>().color = colorFirst;
+                entryTransform.Find("nameText").GetComponent<Text>().color = colorFirst;
             }
             else
             {
-                entryTransform.Find("posText").GetComponent<Text>().color = Color.grey;
-                entryTransform.Find("scoreText").GetComponent<Text>().color = Color.grey;
-                entryTransform.Find("nameText").GetComponent<Text>().color = Color.grey;
+                entryTransform.Find("posText").GetComponent<Text>().color = colorRest;
+                entryTransform.Find("scoreText").GetComponent<Text>().color = colorRest;
+                entryTransform.Find("nameText").GetComponent<Text>().color = colorRest;
             }
 
 

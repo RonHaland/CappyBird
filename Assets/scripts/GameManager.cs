@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -14,17 +16,18 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPage;
     public GameObject countdownPage;
     public GameObject newPlayerPage;
-    //public 
+    public GameObject backgroundController;
+
     GameObject highScorePage;
     public Text scoreText;
 
     public InputField inputTextName;
     string tutorialText;
 
-    // public InputField inputTextPhone;
-    // string tutorialTextPhone;
-
-
+    private int level;
+    public int[] scoresPerLevel;
+    public Sprite[] backgrounds;
+    
     void StartSave()
     {
         tutorialText = PlayerPrefs.GetString("username");
@@ -94,6 +97,21 @@ public class GameManager : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
+        if (scoresPerLevel.Contains(score))
+        {
+            ChangeBackground();
+        }
+    }
+
+    private void ChangeBackground()
+    {
+        var ind = Array.IndexOf(scoresPerLevel, score);
+        var spr = backgrounds[ind];
+        backgroundController.GetComponent<SpriteRenderer>().sprite = spr;
+        backgroundController.GetComponent<Transform>().position = Vector3.zero;
+        var w = spr.rect.width;
+        var h = spr.rect.height;
+        backgroundController.transform.localScale = new Vector3(w/800, h/800, 0);
     }
 
     void OnPlayerDied()
